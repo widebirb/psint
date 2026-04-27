@@ -1,5 +1,16 @@
+import { Routes, Route } from "react-router-dom"
+import LandingPage from './pages/LandingPage'
+import DashboardPage from './pages/DashboardPage'
+import AnalyticsPage from './pages/AnalyticsPage'
+
 function App() {
-  return <div>psint</div>
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/dashboard" element={<DashboardPage />} />
+      <Route path="/analytics" element={<AnalyticsPage />} />
+    </Routes>
+  )
 }
 
 export default App
