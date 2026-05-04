@@ -1,136 +1,101 @@
-import { useState } from "react"
-import { mockJobs, type Job, type JobStatus } from "../mock/jobs"
-import './DashboardPage.css'
+import { useMemo } from "react"
+import { useRecentJobs, useJobs } from "../hooks/useJobs"
+import StatCard from "../components/StatCard"
+import StatusBadge from "../components/StatusBadge"
+import type { JobStatus } from "../types/job"
+import { mockJobs } from "../mock/jobs"
 
+function formatDate(dateStr: string | null) {
+    if (!dateStr) return ''
+    return new Date(dateStr).toLocaleDateString('en-PH', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+    })
+}
 
-function DashboardPage() {
-    const [jobs, setJobs] = useState<Job[]>(mockJobs)
-    const total = mockJobs.length
+export default function DashboardPage() {
+    const { data: allJobsData } = useJobs({ page: 1, page_size: 200 })
+    const { data: recentJobs, isLoading: recentLoading } = useRecentJobs()
 
-    const STATUS_COLORS: Record<JobStatus, string> = {
-        saved: '#e5e5e5',
-        applied: '#bfdbfe',
-        interviewing: '#fef08a',
-        offered: '#bbf7d0',
-        rejected: '#fecaca',
-    }
+    // mock data, remove after backend is finished
+    const mockStats = useMemo(() => {
+        const jobs = mockJobs ?? []
+        const count = (s: JobStatus) => jobs.filter((j) => j.status === s).length
+        return {
+            total: mockJobs.length,
+            applied: count('applied'),
+            interviewing: count('interviewing'),
+            offered: count('offered'),
+            rejected: count('rejected'),
+        }
+    }, [])
 
-    const STATUS_LABELS: Record<JobStatus, string> = {
-        saved: 'Saved',
-        applied: 'Applied',
-        interviewing: 'Interviewing',
-        offered: 'Offered',
-        rejected: 'Rejected'
-    }
-
-    const countByStatus = (Object.keys(STATUS_LABELS) as JobStatus[]).map(status => ({
-        status,
-        label: STATUS_LABELS[status],
-        count: mockJobs.filter(j => j.status === status).length,
-        color: STATUS_COLORS[status],
-    }))
-
-    const countBySource = ['linkedin', 'indeed', 'jobstreet'].map(source => ({
-        source,
-        count: mockJobs.filter(j => j.source_site === source).length,
-    }))
+    const stats = useMemo(() => {
+        const jobs = allJobsData?.data ?? []
+        const count = (s: JobStatus) => jobs.filter((j) => j.status === s).length
+        return {
+            total: jobs.length,
+            applied: count('applied'),
+            interviewing: count('interviewing'),
+            offered: count('offered'),
+            rejected: count('rejected'),
+        }
+    }, [allJobsData])
 
     return (
-        <div className="dashboard">
-            <main className="main-content">
-                <div className="main-header">
-                    <h1>My Applications</h1>
-                </div>
+        <div className="page">
+            <h1 className="page-title">Analytics</h1>
+            <p className="page-subtitle">Overview of your job search.</p>
 
-                <div className="stat-cards">
-                    <div className="stat-card">
-                        <span className="stat-label">Total Applications</span>
-                        <span className="stat-value">{total}</span>
+            <div className="stat-cards">
+                <StatCard label="Total Tracked" value={mockStats.total} icon="O" color="default" />
+                <StatCard label="Applied" value={mockStats.applied} icon="O" color="blue" />
+                <StatCard label="Interviewing" value={mockStats.interviewing} icon="O" color="yellow" />
+                <StatCard label="Offers" value={mockStats.offered} icon="O" color="green" />
+                <StatCard label="Rejected" value={mockStats.rejected} icon="O" color="red" />
+            </div>
+
+            {/* recent app */}
+            <div className="section">
+                <h2 className="section-title">Recent Application</h2>
+                {recentLoading && <p className="muted">Loading...</p>}
+
+                {!recentLoading && (!recentJobs || recentJobs.length === 0) && (
+                    <p className="muted">No Applications yet.</p>
+                )}
+
+
+                {/* uncomment when backend is done */}
+                {/* {recentJobs && recentJobs.length > 0 && ( */}
+                {(
+                    <div className="recent-table-wrap">
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th>Role</th>
+                                    <th>Company</th>
+                                    <th>Status</th>
+                                    <th>Source</th>
+                                    <th>Added</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {/* change when backend added */}
+                                {mockJobs.map((job) => (
+                                    <tr key={job.id}>
+                                        <td className="td-primary">{job.title}</td>
+                                        <td>{job.company}</td>
+                                        <td><StatusBadge status={job.status} /></td>
+                                        <td className="muted capitalize">{job.source_site ?? ''}</td>
+                                        <td className="muted">{formatDate(job.created_at)}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
-                    {countByStatus.map(s => (
-                        <div className="stat-card" key={s.status}>
-                            <span className="stat-label">{s.label}</span>
-                            <span className="stat-value">{s.count}</span>
-                        </div>
-                    ))}
-                </div>
-
-
-                <table className="jobs-table">
-                    <thead>
-                        <tr>
-                            <th>Role</th>
-                            <th>Company</th>
-                            <th>Location</th>
-                            <th>Source</th>
-                            <th>Date Posted</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {jobs.map(job => (
-                            <tr key={job.id}>
-                                <td>{job.title}</td>
-                                <td>{job.company}</td>
-                                <td>{job.location}</td>
-                                <td className="source-site">{job.source_site}</td>
-                                <td>{job.date_posted}</td>
-                                <td>
-                                    <span className={`status-badge status-${job.status}`}>
-                                        {STATUS_LABELS[job.status]}
-                                    </span>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-
-                <div className="analytics-sections">
-                    <div className="analytics-card">
-                        <h2>Applications by Status</h2>
-                        <div className="bar-list">
-                            {countByStatus.map(s => (
-                                <div className="bar-row" key={s.status}>
-                                    <span className="bar-label">{s.label}</span>
-                                    <div className="bar-track">
-                                        <div
-                                            className="bar-fill"
-                                            style={{
-                                                width: total ? `${(s.count / total) * 100}%` : '0%',
-                                                background: s.color,
-                                            }}
-                                        />
-                                    </div>
-                                    <span className="bar-count">{s.count}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="analytics-card">
-                        <h2>Applications by Source</h2>
-                        <div className="bar-list">
-                            {countBySource.map(s => (
-                                <div className="bar-row" key={s.source}>
-                                    <span className="bar-label" style={{ textTransform: 'capitalize' }}>{s.source}</span>
-                                    <div className="bar-track">
-                                        <div
-                                            className="bar-fill"
-                                            style={{
-                                                width: total ? `${(s.count / total) * 100}%` : '0%',
-                                                background: '#111',
-                                            }}
-                                        />
-                                    </div>
-                                    <span className="bar-count">{s.count}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </main>
+                )}
+            </div>
         </div>
     )
 }
-
-export default DashboardPage
