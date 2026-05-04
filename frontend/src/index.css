@@ -174,3 +174,96 @@ body {
   font-size: 0.9rem;
   margin-bottom: 32px;
 }
+
+/* status page */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+.badge--saved {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.badge--applied {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.badge--interviewing {
+  background: #fef9c3;
+  color: #a16207;
+}
+
+.badge--offered {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.badge--rejected {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* stat carsd */
+
+.stat-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-full, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid #e5e5e5;
+}
+
+.stat-card__icon {
+  font-size: 1.75rem;
+}
+
+.stat-card__body {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-card__value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.stat-card__label {
+  font-size: 0.78rem;
+  color: #888;
+  margin-top: 4px;
+}
+
+.stat-card--blue .stat-card__value {
+  color: #2563eb;
+}
+
+.stat-card--yellow .stat-card__value {
+  color: #a16207;
+}
+
+.stat-card--green .stat-card__value {
+  color: #15803d;
+}
+
+.stat-card--red .stat-card__value {
+  color: #b91c1c;
+}
+
+.stat-card--default .stat-card__value {
+  color: #1a1a1a;
+}
