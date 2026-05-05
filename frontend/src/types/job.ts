@@ -1,5 +1,5 @@
 export type JobStatus = 'saved' | 'applied' | 'interviewing' | 'offered' | 'rejected'
-export type JobSource = 'linkedin' | 'ineeded' | 'jobstreet' | 'manual'
+export type JobSource = 'linkedin' | 'indeed' | 'jobstreet' | 'manual'
 
 export interface Job {
     id: string
