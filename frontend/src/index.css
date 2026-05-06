@@ -346,6 +346,7 @@ body {
   margin-bottom: 24px;
 }
 
+/* buttons */
 .btn {
   padding: 8px 16px;
   border-radius: 8px;
@@ -388,6 +389,128 @@ body {
   background: #b91c1c;
 }
 
+/* filters */
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.search-wrap {
+  display: flex;
+  gap: 6px;
+  flex: 1;
+  min-width: 220px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: #2563eb;
+}
+
+.filter-select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  background: #fff;
+  outline: none;
+  cursor: pointer;
+}
+
+/* sortable headers */
+.th-sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.th-sortable:hover {
+  color: #2563eb;
+}
+
+.sort-icon {
+  margin-left: 4px;
+  opacity: 0.4;
+  font-style: normal;
+}
+
+.sort-icon--active {
+  opacity: 1;
+  color: #2563eb;
+}
+
+/* inline status select */
+.status-select {
+  border: none;
+  background: transparent;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  color: #444;
+  padding: 2px 4px;
+}
+
+/* row actions */
+.row-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.action-btn:hover {
+  background: #f0f0f0;
+}
+
+.action-btn--danger:hover {
+  background: #fee2e2;
+}
+
+/* job link */
+.job-link {
+  color: #2563eb;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* table empty state */
+.table-empty {
+  text-align: center;
+  padding: 48px 16px !important;
+  color: #aaa;
+}
+
+/* pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.pagination-info {
+  font-size: 0.875rem;
+  color: #666;
+}
 
 /* modal */
 .modal-overlay {
@@ -419,7 +542,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px 40px 0;
+  padding: 20px 24px 0;
 }
 
 .modal-header h2 {
@@ -441,16 +564,16 @@ body {
 }
 
 .modal-form {
-  padding: 16px 24px;
+  padding: 20px 24px;
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
 .modal-body {
-  padding: 16px;
+  padding: 16px 24px;
   font-size: 0.9rem;
-  color: #444
+  color: #444;
 }
 
 .modal-footer {
@@ -460,7 +583,7 @@ body {
   padding-top: 8px;
 }
 
-/* form row */
+/* form */
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
