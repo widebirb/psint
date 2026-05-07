@@ -4,6 +4,9 @@ import StatCard from "../components/StatCard"
 import StatusBadge from "../components/StatusBadge"
 import type { JobStatus } from "../types/job"
 import { mockJobs } from "../mock/jobs"
+import { Check, CheckCircle, CircleOff, ClipboardClock, Folder, icons, SquareCheck, SquareCheckBigIcon, SquareUserRound, SquareX } from "lucide-react"
+
+const ICON_SIZE = 30
 
 function formatDate(dateStr: string | null) {
     if (!dateStr) return ''
@@ -49,11 +52,11 @@ export default function DashboardPage() {
             <p className="page-subtitle">Overview of your job search.</p>
 
             <div className="stat-cards">
-                <StatCard label="Total Tracked" value={mockStats.total} icon="O" color="default" />
-                <StatCard label="Applied" value={mockStats.applied} icon="O" color="blue" />
-                <StatCard label="Interviewing" value={mockStats.interviewing} icon="O" color="yellow" />
-                <StatCard label="Offers" value={mockStats.offered} icon="O" color="green" />
-                <StatCard label="Rejected" value={mockStats.rejected} icon="O" color="red" />
+                <StatCard label="Total Tracked" value={mockStats.total} icon={<Folder size={ICON_SIZE} />} color="default" />
+                <StatCard label="Applied" value={mockStats.applied} icon={<ClipboardClock size={ICON_SIZE} />} color="blue" />
+                <StatCard label="Interviewing" value={mockStats.interviewing} icon={<SquareUserRound size={ICON_SIZE} />} color="yellow" />
+                <StatCard label="Offers" value={mockStats.offered} icon={<SquareCheckBigIcon size={ICON_SIZE} />} color="green" />
+                <StatCard label="Rejected" value={mockStats.rejected} icon={<CircleOff size={ICON_SIZE} />} color="red" />
             </div>
 
             {/* recent app */}

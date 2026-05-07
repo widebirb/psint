@@ -1,10 +1,14 @@
 import { NavLink, useNavigate } from "react-router-dom"
 import { toast } from "sonner"
 import './../index.css'
+import { BriefcaseBusiness, FileUser, LayoutDashboard, LogOut } from "lucide-react";
+import { size } from "zod";
 
+
+const ICON_SIZE = 18
 const NAV_ITEMS = [
-    { to: '/dashboard', label: 'Analytics', icon: 'A' },
-    { to: '/application', label: 'Applications', icon: 'J' },
+    { to: '/dashboard', label: 'Analytics', icon: < LayoutDashboard size={ICON_SIZE} /> },
+    { to: '/application', label: 'Applications', icon: <FileUser size={ICON_SIZE} /> },
 ]
 
 export default function Sidebar() {
@@ -19,6 +23,7 @@ export default function Sidebar() {
     return (
         <div className="sidebar">
             <div className="sidebar-logo">
+                <BriefcaseBusiness size={25} />
                 <span>PSINT</span>
             </div>
 
@@ -31,15 +36,18 @@ export default function Sidebar() {
                             `sidebar-link ${isActive ? 'sidebar-link--active' : ''}`
                         }
                     >
-                        <span>{item.icon}</span>
+                        <span className="span--with-icon">{item.icon}</span>
                         <span>{item.label}</span>
                     </NavLink>
                 ))}
             </nav>
 
             <button className="sidebar-logout" onClick={handleLogout}>
-                <span>Logout</span>
+                <span className="span--with-icon">
+                    <LogOut size={ICON_SIZE} />
+                </span>
+                <span>Log Out</span>
             </button>
-        </div>
+        </div >
     )
 }

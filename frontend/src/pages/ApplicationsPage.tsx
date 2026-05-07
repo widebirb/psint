@@ -5,8 +5,12 @@ import DeleteConfirmModal from '../components/DeleteConfirmModal'
 import type { Job, JobStatus } from '../types/job'
 import type { JobsQueryParams } from '../types/pagination'
 import { mockJobs } from "../mock/jobs"
+import { ArrowLeft, ArrowRight, MoveDown, MoveUp, MoveVertical, Plus, SquarePen, Trash } from "lucide-react"
 
 const PAGE_SIZE = 10
+const ICON_SIZE_SM = 15
+const ICON_SIZE_MD = 18
+const ICON_SIZE_LG = 20
 
 type SortBy = JobsQueryParams['sort_by']
 type SortDir = 'asc' | 'desc'
@@ -63,8 +67,8 @@ export default function ApplicationsPage() {
     }
 
     const sortIcon = (col: SortBy) => {
-        if (sortBy !== col) return <span className="sort-icon">↕</span>
-        return <span className="sort-icon sort-icon--active">{sortDir === 'asc' ? '↑' : '↓'}</span>
+        if (sortBy !== col) return <span className="sort-icon"><MoveVertical size={ICON_SIZE_SM} /></span>
+        return <span className="sort-icon sort-icon--active">{sortDir === 'asc' ? <MoveUp size={ICON_SIZE_SM} /> : <MoveDown size={ICON_SIZE_SM} />}</span>
     }
 
     // search on enter or button click
@@ -97,8 +101,8 @@ export default function ApplicationsPage() {
                         {total > 0 ? `${total} application${total !== 1 ? 's' : ''} tracked` : 'No applications yet.'}
                     </p>
                 </div>
-                <button className="btn btn--primary" onClick={() => { setEditJob(null); setFormOpen(true) }}>
-                    + Add Application
+                <button className="btn btn--primary btn--with-icon" onClick={() => { setEditJob(null); setFormOpen(true) }}>
+                    <Plus size={ICON_SIZE_MD} />Add Application
                 </button>
             </div>
 
@@ -157,13 +161,23 @@ export default function ApplicationsPage() {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th onClick={() => handleSort('title')} className="th-sortable">Role {sortIcon('title')}</th>
-                            <th onClick={() => handleSort('company')} className="th-sortable">Company {sortIcon('company')}</th>
+                            <th onClick={() => handleSort('title')} className="th-sortable">
+                                <span className="th-content">Role {sortIcon('title')}</span>
+                            </th>
+                            <th onClick={() => handleSort('company')} className="th-sortable">
+                                <span className="th-content">Company {sortIcon('company')}</span>
+                            </th>
                             <th>Location</th>
-                            <th onClick={() => handleSort('status')} className="th-sortable">Status {sortIcon('status')}</th>
+                            <th onClick={() => handleSort('status')} className="th-sortable">
+                                <span className="th-content">Status {sortIcon('status')}</span>
+                            </th>
                             <th>Source</th>
-                            <th onClick={() => handleSort('date_posted')} className="th-sortable">Posted {sortIcon('date_posted')}</th>
-                            <th onClick={() => handleSort('created_at')} className="th-sortable">Added {sortIcon('created_at')}</th>
+                            <th onClick={() => handleSort('date_posted')} className="th-sortable">
+                                <span className="th-content">Posted {sortIcon('date_posted')}</span>
+                            </th>
+                            <th onClick={() => handleSort('created_at')} className="th-sortable">
+                                <span className="th-content">Added {sortIcon('created_at')}</span>
+                            </th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -202,13 +216,17 @@ export default function ApplicationsPage() {
                                         <option value="rejected">Rejected</option>
                                     </select>
                                 </td>
-                                <td className="muted capitalize">{job.source_site ?? '—'}</td>
+                                <td className="muted capitalize">{job.source_site ?? ''}</td>
                                 <td className="muted">{formatDate(job.date_posted)}</td>
                                 <td className="muted">{formatDate(job.created_at)}</td>
                                 <td>
                                     <div className="row-actions">
-                                        <button className="action-btn" onClick={() => handleEdit(job)}>edit</button>
-                                        <button className="action-btn action-btn--danger" onClick={() => setDeleteTarget(job)}>delete</button>
+                                        <button className="action-btn action-btn--edit" onClick={() => handleEdit(job)}>
+                                            <SquarePen size={ICON_SIZE_LG} />
+                                        </button>
+                                        <button className="action-btn action-btn--danger" onClick={() => setDeleteTarget(job)}>
+                                            <Trash size={ICON_SIZE_LG} />
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -218,22 +236,22 @@ export default function ApplicationsPage() {
             </div>
 
             {/* pagination */}
-            {totalPages > 1 && (
+            {totalPages > 0 && (
                 <div className="pagination">
                     <button
-                        className="btn btn--ghost"
+                        className="btn btn--ghost btn--with-icon"
                         disabled={page === 1}
                         onClick={() => setPage((p) => p - 1)}
                     >
-                        ← Prev
+                        <ArrowLeft size={ICON_SIZE_SM} /> Prev
                     </button>
                     <span className="pagination-info">Page {page} of {totalPages}</span>
                     <button
-                        className="btn btn--ghost"
+                        className="btn btn--ghost btn--with-icon"
                         disabled={page === totalPages}
                         onClick={() => setPage((p) => p + 1)}
                     >
-                        Next →
+                        Next <ArrowRight size={ICON_SIZE_SM} />
                     </button>
                 </div>
             )}

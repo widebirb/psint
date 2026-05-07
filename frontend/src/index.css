@@ -114,6 +114,14 @@ body {
   flex: 1;
 }
 
+.span--with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
 .sidebar-link {
   text-decoration: none;
   display: flex;
@@ -389,6 +397,14 @@ body {
   background: #b91c1c;
 }
 
+.btn--with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
 /* filters */
 .filters {
   display: flex;
@@ -432,6 +448,13 @@ body {
 .th-sortable {
   cursor: pointer;
   user-select: none;
+}
+
+.th-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
 }
 
 .th-sortable:hover {
@@ -481,7 +504,11 @@ body {
 }
 
 .action-btn--danger:hover {
-  background: #fee2e2;
+  background: #fb6b6b;
+}
+
+.action-btn--edit:hover {
+  background: #fcf94188;
 }
 
 /* job link */

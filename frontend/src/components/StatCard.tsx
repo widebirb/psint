@@ -1,7 +1,9 @@
+import type { ReactNode } from "react"
+
 interface StatCardProps {
     label: string
     value: number | string
-    icon: string
+    icon: ReactNode | string
     color?: 'blue' | 'yellow' | 'green' | 'red' | 'default'
 }
 
