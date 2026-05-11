@@ -1,4 +1,5 @@
 import type { ReactNode } from "react"
+import s from './StatCard.module.css'
 
 interface StatCardProps {
     label: string
@@ -9,11 +10,11 @@ interface StatCardProps {
 
 export default function StatCard({ label, value, icon, color = 'default' }: StatCardProps) {
     return (
-        <div className={`stat-card stat-card--${color}`}>
-            <div className="stat-card__icon">{icon}</div>
-            <div className="stat-card__body">
-                <span className="start-card__value">{value}</span>
-                <span className="stat-card__label">{label}</span>
+        <div className={`${s.card} ${s[color]}`}>
+            <div className={s.icon}>{icon}</div>
+            <div className={s.body}>
+                <span className={s.value}>{value}</span>
+                <span className={s.label}>{label}</span>
             </div>
         </div>
     )

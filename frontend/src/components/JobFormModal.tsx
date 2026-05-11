@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useCreateJob, useUpdateJob } from '../hooks/useJobs'
 import type { Job } from '../types/job'
+import s from './Modal.module.css'
 
 const schema = z.object({
     title: z.string().min(1, 'Title is required'),
@@ -40,7 +41,6 @@ export default function JobFormModal({ open, onClose, editJob }: Props) {
         defaultValues: { status: 'saved', source_site: 'manual' },
     })
 
-    // populate form when editing
     useEffect(() => {
         if (editJob) {
             reset({
@@ -78,33 +78,33 @@ export default function JobFormModal({ open, onClose, editJob }: Props) {
     }
 
     return (
-        <div className="modal-overlay" onClick={onClose}>
-            <div className="modal" onClick={(e) => e.stopPropagation()}>
-                <div className="modal-header">
+        <div className={s.overlay} onClick={onClose}>
+            <div className={s.modal} onClick={(e) => e.stopPropagation()}>
+                <div className={s.header}>
                     <h2>{editJob ? 'Edit Application' : 'Add Application'}</h2>
-                    <button className="modal-close" onClick={onClose}>✕</button>
+                    <button className={s.closeBtn} onClick={onClose}>✕</button>
                 </div>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="modal-form">
-                    <div className="form-row">
-                        <div className="form-group">
+                <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+                    <div className={s.formRow}>
+                        <div className={s.formGroup}>
                             <label>Job Title *</label>
                             <input {...register('title')} placeholder="e.g. Software Engineer" />
-                            {errors.title && <span className="form-error">{errors.title.message}</span>}
+                            {errors.title && <span className={s.formError}>{errors.title.message}</span>}
                         </div>
-                        <div className="form-group">
+                        <div className={s.formGroup}>
                             <label>Company *</label>
                             <input {...register('company')} placeholder="e.g. Acme Corp" />
-                            {errors.company && <span className="form-error">{errors.company.message}</span>}
+                            {errors.company && <span className={s.formError}>{errors.company.message}</span>}
                         </div>
                     </div>
 
-                    <div className="form-row">
-                        <div className="form-group">
+                    <div className={s.formRow}>
+                        <div className={s.formGroup}>
                             <label>Location</label>
                             <input {...register('location')} placeholder="e.g. Remote, Manila" />
                         </div>
-                        <div className="form-group">
+                        <div className={s.formGroup}>
                             <label>Job Type</label>
                             <select {...register('job_type')}>
                                 <option value="">— Select —</option>
@@ -117,19 +117,19 @@ export default function JobFormModal({ open, onClose, editJob }: Props) {
                         </div>
                     </div>
 
-                    <div className="form-row">
-                        <div className="form-group">
+                    <div className={s.formRow}>
+                        <div className={s.formGroup}>
                             <label>Salary Range</label>
                             <input {...register('salary_range')} placeholder="e.g. ₱80,000–₱120,000" />
                         </div>
-                        <div className="form-group">
+                        <div className={s.formGroup}>
                             <label>Date Posted</label>
                             <input type="date" {...register('date_posted')} />
                         </div>
                     </div>
 
-                    <div className="form-row">
-                        <div className="form-group">
+                    <div className={s.formRow}>
+                        <div className={s.formGroup}>
                             <label>Status</label>
                             <select {...register('status')}>
                                 <option value="saved">Saved</option>
@@ -139,7 +139,7 @@ export default function JobFormModal({ open, onClose, editJob }: Props) {
                                 <option value="rejected">Rejected</option>
                             </select>
                         </div>
-                        <div className="form-group">
+                        <div className={s.formGroup}>
                             <label>Source</label>
                             <select {...register('source_site')}>
                                 <option value="manual">Manual</option>
@@ -150,20 +150,20 @@ export default function JobFormModal({ open, onClose, editJob }: Props) {
                         </div>
                     </div>
 
-                    <div className="form-group">
+                    <div className={s.formGroup}>
                         <label>Job Posting URL</label>
                         <input {...register('description_url')} placeholder="https://..." />
                         {errors.description_url && (
-                            <span className="form-error">{errors.description_url.message}</span>
+                            <span className={s.formError}>{errors.description_url.message}</span>
                         )}
                     </div>
 
-                    <div className="form-group">
+                    <div className={s.formGroup}>
                         <label>Notes</label>
                         <textarea {...register('notes')} rows={3} placeholder="Recruiter name, interview notes, etc." />
                     </div>
 
-                    <div className="modal-footer">
+                    <div className={s.footer}>
                         <button type="button" className="btn btn--ghost" onClick={onClose}>
                             Cancel
                         </button>

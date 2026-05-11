@@ -1,0 +1,127 @@
+/* Table wrapper */
+.tableWrap {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  overflow: hidden;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.searchWrap {
+  display: flex;
+  gap: 6px;
+  flex: 1;
+  min-width: 220px;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.searchInput:focus {
+  border-color: #2563eb;
+}
+
+.filterSelect {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  background: #fff;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Sortable headers */
+.thSortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.thContent {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+}
+
+.thSortable:hover {
+  color: #2563eb;
+}
+
+.sortIcon {
+  margin-left: 4px;
+  opacity: 0.4;
+  font-style: normal;
+}
+
+.sortIconActive {
+  opacity: 1;
+  color: #2563eb;
+}
+
+/* Inline status select */
+.statusSelect {
+  border: none;
+  background: transparent;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  color: #444;
+  padding: 2px 4px;
+}
+
+/* Row actions */
+.rowActions {
+  display: flex;
+  gap: 6px;
+}
+
+.actionBtn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  padding: 4px 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.actionBtn:hover        { background: #f0f0f0; }
+.actionBtnDanger:hover  { background: #fb6b6b; }
+.actionBtnEdit:hover    { background: #fcf94188; }
+
+/* Job link */
+.jobLink {
+  color: #2563eb;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.paginationInfo {
+  font-size: 0.875rem;
+  color: #666;
+}

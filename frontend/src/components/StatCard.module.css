@@ -1,0 +1,50 @@
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid #e5e5e5;
+}
+
+.icon {
+  font-size: 1.75rem;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+}
+
+.value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.label {
+  font-size: 0.78rem;
+  color: #888;
+  margin-top: 4px;
+}
+
+.blue .value {
+  color: #2563eb;
+}
+
+.yellow .value {
+  color: #a16207;
+}
+
+.green .value {
+  color: #15803d;
+}
+
+.red .value {
+  color: #b91c1c;
+}
+
+.default .value {
+  color: #1a1a1a;
+}

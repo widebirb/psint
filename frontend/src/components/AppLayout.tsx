@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
-import './../index.css'
+import s from './AppLayout.module.css'
 
 export default function AppLayout() {
     return (
-        <div className="app-layout">
+        <div className={s.layout}>
             <Sidebar />
-            <main className="app-main">
+            <main className={s.main}>
                 <Outlet />
             </main>
         </div>

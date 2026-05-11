@@ -4,7 +4,8 @@ import StatCard from "../components/StatCard"
 import StatusBadge from "../components/StatusBadge"
 import type { JobStatus } from "../types/job"
 import { mockJobs } from "../mock/jobs"
-import { Check, CheckCircle, CircleOff, ClipboardClock, Folder, icons, SquareCheck, SquareCheckBigIcon, SquareUserRound, SquareX } from "lucide-react"
+import { CircleOff, ClipboardClock, Folder, SquareCheckBigIcon, SquareUserRound } from "lucide-react"
+import s from './DashboardPage.module.css'
 
 const ICON_SIZE = 30
 
@@ -24,7 +25,7 @@ export default function DashboardPage() {
     // mock data, remove after backend is finished
     const mockStats = useMemo(() => {
         const jobs = mockJobs ?? []
-        const count = (s: JobStatus) => jobs.filter((j) => j.status === s).length
+        const count = (st: JobStatus) => jobs.filter((j) => j.status === st).length
         return {
             total: mockJobs.length,
             applied: count('applied'),
@@ -36,7 +37,7 @@ export default function DashboardPage() {
 
     const stats = useMemo(() => {
         const jobs = allJobsData?.data ?? []
-        const count = (s: JobStatus) => jobs.filter((j) => j.status === s).length
+        const count = (st: JobStatus) => jobs.filter((j) => j.status === st).length
         return {
             total: jobs.length,
             applied: count('applied'),
@@ -51,7 +52,7 @@ export default function DashboardPage() {
             <h1 className="page-title">Analytics</h1>
             <p className="page-subtitle">Overview of your job search.</p>
 
-            <div className="stat-cards">
+            <div className={s.grid}>
                 <StatCard label="Total Tracked" value={mockStats.total} icon={<Folder size={ICON_SIZE} />} color="default" />
                 <StatCard label="Applied" value={mockStats.applied} icon={<ClipboardClock size={ICON_SIZE} />} color="blue" />
                 <StatCard label="Interviewing" value={mockStats.interviewing} icon={<SquareUserRound size={ICON_SIZE} />} color="yellow" />
@@ -68,11 +69,8 @@ export default function DashboardPage() {
                     <p className="muted">No Applications yet.</p>
                 )}
 
-
-                {/* uncomment when backend is done */}
-                {/* {recentJobs && recentJobs.length > 0 && ( */}
                 {(
-                    <div className="recent-table-wrap">
+                    <div className={s.tableWrap}>
                         <table className="table">
                             <thead>
                                 <tr>
@@ -84,7 +82,6 @@ export default function DashboardPage() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* change when backend added */}
                                 {mockJobs.map((job) => (
                                     <tr key={job.id}>
                                         <td className="td-primary">{job.title}</td>

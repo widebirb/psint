@@ -1,5 +1,5 @@
 import React from 'react'
-import './../index.css'
+import s from './LoginPage.module.css'
 
 export default function LoginPage() {
     const handleGoogleLogin = () => {
@@ -7,11 +7,11 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="login-container">
-            <div className="login-card">
+        <div className={s.container}>
+            <div className={s.card}>
                 <h1>Job Tracker</h1>
                 <p>Track your job applications in one place</p>
-                <button className="google-btn" onClick={handleGoogleLogin}>
+                <button className={s.googleBtn} onClick={handleGoogleLogin}>
                     <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" />
                     Sign in with Google
                 </button>
