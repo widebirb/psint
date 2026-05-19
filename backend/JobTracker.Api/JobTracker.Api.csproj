@@ -16,10 +16,12 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.7" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Auth\" />
+    <Folder Include="Jobs\" />
     <Folder Include="Data\" />
     <Folder Include="Models\" />
   </ItemGroup>

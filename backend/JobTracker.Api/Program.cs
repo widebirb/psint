@@ -1,22 +1,31 @@
 using System.Text;
+using DotNetEnv;
 using JobTracker.Api.Auth;
 using JobTracker.Api.Data;
+using JobTracker.Api.Endpoints;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
+
+// Load .env in development
+Env.TraversePath().Load();
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-var jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET")!;
-var jwtIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER")!;
-var jwtAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE")!;
+var jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET")
+    ?? throw new InvalidOperationException("JWT_SECRET environment variable is not set.");
+var jwtIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER")
+    ?? throw new InvalidOperationException("JWT_ISSUER environment variable is not set.");
+var jwtAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE")
+    ?? throw new InvalidOperationException("JWT_AUDIENCE environment variable is not set.");
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -53,6 +62,10 @@ app.UseCors("Frontend");
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapJobEndpoints();
+app.MapAuthEndpoints();
+app.MapUserEndpoints();
+
 // auto-migrate on startup
 using (var scope = app.Services.CreateScope())
 {
@@ -63,8 +76,10 @@ using (var scope = app.Services.CreateScope())
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
+app.Run();
 
