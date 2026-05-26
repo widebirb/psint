@@ -107,7 +107,7 @@ export default function JobFormModal({ open, onClose, editJob }: Props) {
                         <div className={s.formGroup}>
                             <label>Job Type</label>
                             <select {...register('job_type')}>
-                                <option value="">— Select —</option>
+                                <option value=""> Select </option>
                                 <option value="Full-time">Full-time</option>
                                 <option value="Part-time">Part-time</option>
                                 <option value="Contract">Contract</option>

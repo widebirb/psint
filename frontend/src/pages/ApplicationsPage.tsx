@@ -4,7 +4,6 @@ import JobFormModal from '../components/JobFormModal'
 import DeleteConfirmModal from '../components/DeleteConfirmModal'
 import type { Job, JobStatus } from '../types/job'
 import type { JobsQueryParams } from '../types/pagination'
-import { mockJobs } from "../mock/jobs"
 import { ArrowLeft, ArrowRight, MoveDown, MoveUp, MoveVertical, Plus, SquarePen, Trash } from "lucide-react"
 import s from './ApplicationsPage.module.css'
 
@@ -17,7 +16,7 @@ type SortBy = JobsQueryParams['sort_by']
 type SortDir = 'asc' | 'desc'
 
 function formatDate(dateStr: string | null) {
-    if (!dateStr) return '—'
+    if (!dateStr) return ''
     return new Date(dateStr).toLocaleDateString('en-PH', {
         month: 'short', day: 'numeric', year: 'numeric',
     })
@@ -194,7 +193,7 @@ export default function ApplicationsPage() {
                                 <td colSpan={8} className="table-empty">No applications found.</td>
                             </tr>
                         )}
-                        {mockJobs.map((job) => (
+                        {jobs.map((job) => (
                             <tr key={job.id}>
                                 <td className="td-primary">
                                     {job.description_url
@@ -203,7 +202,7 @@ export default function ApplicationsPage() {
                                     }
                                 </td>
                                 <td>{job.company}</td>
-                                <td className="muted">{job.location ?? '—'}</td>
+                                <td className="muted">{job.location ?? ''}</td>
                                 <td>
                                     <select
                                         className={s.statusSelect}
