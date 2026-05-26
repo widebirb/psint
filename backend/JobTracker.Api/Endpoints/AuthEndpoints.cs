@@ -1,4 +1,5 @@
 using JobTracker.Api.Auth;
+using System.Text.Json.Serialization;
 
 namespace JobTracker.Api.Endpoints;
 
@@ -16,10 +17,13 @@ public static class AuthEndpoints
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"Auth error: {ex.Message}");
                 return Results.Unauthorized();
             }
         });
     }
 
-    public record TokenRequest(string IdToken);
+    public record TokenRequest(
+        [property: JsonPropertyName("id_token")] string IdToken
+    );
 }
