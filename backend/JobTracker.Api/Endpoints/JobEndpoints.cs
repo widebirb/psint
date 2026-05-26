@@ -156,7 +156,7 @@ public static class JobEndpoints
 
     private static Guid? GetUserId(ClaimsPrincipal principal)
     {
-        var raw = principal.FindFirstValue(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Sub);
+        var raw = principal.FindFirstValue(ClaimTypes.NameIdentifier);
         return Guid.TryParse(raw, out var id) ? id : null;
     }
 

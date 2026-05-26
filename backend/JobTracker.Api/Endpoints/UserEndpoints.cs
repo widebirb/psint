@@ -11,7 +11,7 @@ public static class UserEndpoints
     {
         app.MapGet("/me", async (ClaimsPrincipal principal, AppDbContext db) =>
         {
-            var userId = principal.FindFirstValue(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Sub);
+            var userId = principal.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId is null) return Results.Unauthorized();
 
             var user = await db.Users.FindAsync(Guid.Parse(userId));
