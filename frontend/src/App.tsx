@@ -1,36 +1,31 @@
-import { Routes, Route, Navigate } from "react-router-dom"
-import LandingPage from './pages/LandingPage'
-import DashboardPage from './pages/DashboardPage'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import LoginPage from './pages/LoginPage'
-import AuthCallbackPage from "./pages/AuthCallbackPage"
-import AppLayout from "./components/AppLayout"
-import ApplicationsPage from "./pages/ApplicationsPage"
+import DashboardPage from './pages/DashboardPage'
+import ApplicationsPage from './pages/ApplicationsPage'
+import AppLayout from './components/AppLayout'
+import LandingPage from "./pages/LandingPage"
 
-// function PrivateRoute({ children }: { children: React.ReactNode }) {
-//   const token = localStorage.getItem('jwt')
-//   return token ? <>{children}</> : <Navigate to="/login" replace />
-// }
+function PrivateRoute({ children }: { children: React.ReactNode }) {
+  const token = localStorage.getItem('jwt')
+  return token ? <>{children}</> : <Navigate to="/" replace />
+}
 
-function App() {
+export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/auth/callback" element={<AuthCallbackPage />} />
       <Route path="/" element={<LandingPage />} />
       <Route
         element={
-          // <PrivateRoute>
-          <AppLayout />
-          // </PrivateRoute>
+          <PrivateRoute>
+            <AppLayout />
+          </PrivateRoute>
         }
       >
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/applications" element={<ApplicationsPage />} />
       </Route>
-
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
   )
 }
-
-export default App
