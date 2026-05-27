@@ -9,7 +9,9 @@ using Microsoft.IdentityModel.Tokens;
 
 
 // Load .env in development
-Env.TraversePath().Load();
+if (File.Exists(".env"))
+    Env.TraversePath().Load();
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -17,14 +19,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")));
+var dbConnectionString = builder.Configuration["DB_CONNECTION_STRING"]
+    ?? throw new InvalidOperationException("DB_CONNECTION_STRING is not set.");
 
-var jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET")
+var jwtSecret = builder.Configuration["JWT_SECRET"]
     ?? throw new InvalidOperationException("JWT_SECRET environment variable is not set.");
-var jwtIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER")
+
+var jwtIssuer = builder.Configuration["JWT_ISSUER"]
     ?? throw new InvalidOperationException("JWT_ISSUER environment variable is not set.");
-var jwtAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE")
+
+var jwtAudience = builder.Configuration["JWT_AUDIENCE"]
     ?? throw new InvalidOperationException("JWT_AUDIENCE environment variable is not set.");
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -45,7 +49,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization();
 builder.Services.AddHttpClient();
 
-var frontendUrl = Environment.GetEnvironmentVariable("FRONTEND_URL") ?? "http://localhost:5173";
+var frontendUrl = builder.Configuration["FRONTEND_URL"] ?? "http://localhost:5173";
 
 builder.Services.AddCors(options =>
 {
@@ -81,3 +85,5 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
+
+public partial class Program { }
