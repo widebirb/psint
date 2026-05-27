@@ -84,6 +84,18 @@ public static class JobEndpoints
             var userId = GetUserId(principal);
             if (userId is null) return Results.Unauthorized();
 
+            //manual validation
+            var errors = new Dictionary<string, string>();
+
+            if (string.IsNullOrWhiteSpace(req.Title))
+                errors[nameof(req.Title)] = "Title is required.";
+
+            if (string.IsNullOrWhiteSpace(req.Company))
+                errors[nameof(req.Company)] = "Company is required.";
+
+            if (errors.Count > 0)
+                return Results.BadRequest(new { errors });
+
             var job = new Job
             {
                 UserId = userId.Value,
