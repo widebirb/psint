@@ -31,6 +31,9 @@ var jwtIssuer = builder.Configuration["JWT_ISSUER"]
 var jwtAudience = builder.Configuration["JWT_AUDIENCE"]
     ?? throw new InvalidOperationException("JWT_AUDIENCE environment variable is not set.");
 
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(dbConnectionString));
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
