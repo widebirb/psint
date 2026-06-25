@@ -1,3 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* design tokens */
+:root {
+  --accent: #FACC15;
+  --accent-hover: #F59E0B;
+  --accent-dark: #78350F;
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --text-muted: #9CA3AF;
+  --bg-page: #F9FAFB;
+  --bg-white: #ffffff;
+  --border: #E5E7EB;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.14);
+}
+
 /* reset */
 * {
   margin: 0;
@@ -6,7 +27,9 @@
 }
 
 body {
-  font-family: sans-serif;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+  background: var(--bg-page);
 }
 
 /* page layout*/
@@ -61,12 +84,12 @@ body {
 }
 
 .btn--primary {
-  background: #2563eb;
-  color: #fff;
+  background: var(--accent);
+  color: var(--accent-dark);
 }
 
 .btn--primary:hover:not(:disabled) {
-  background: #1d4ed8;
+  background: var(--accent-hover);
 }
 
 .btn--ghost {
