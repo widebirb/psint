@@ -53,11 +53,16 @@ builder.Services.AddAuthorization();
 builder.Services.AddHttpClient();
 
 var frontendUrl = builder.Configuration["FRONTEND_URL"] ?? "http://localhost:5173";
+var extensionOrigin = builder.Configuration["EXTENSION_ORIGIN"]; // e.g. chrome-extension://<id>
+
+var corsOrigins = new List<string> { frontendUrl };
+if (!string.IsNullOrWhiteSpace(extensionOrigin))
+    corsOrigins.Add(extensionOrigin);
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("Frontend", policy =>
-        policy.WithOrigins(frontendUrl)
+        policy.WithOrigins(corsOrigins.ToArray())
               .AllowAnyHeader()
               .AllowAnyMethod());
 });

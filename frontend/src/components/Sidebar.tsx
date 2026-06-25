@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom"
 import { toast } from "sonner"
 import s from './Sidebar.module.css'
-import { BriefcaseBusiness, CircleQuestionMarkIcon, FileUser, LayoutDashboard, LogOut } from "lucide-react";
+import { BriefcaseBusiness, CircleQuestionMarkIcon, Clipboard, FileUser, LayoutDashboard, LogOut } from "lucide-react";
 import { useUser } from "../hooks/useUser";
 
 const ICON_SIZE = 18
@@ -18,6 +18,17 @@ export default function Sidebar() {
         localStorage.removeItem('jwt')
         toast.success('Logged out')
         navigate('/login', { replace: true })
+    }
+
+    const handleCopyToken = () => {
+        const token = localStorage.getItem('jwt')
+        if (!token) {
+            toast.error('No token found. Please sign in first.')
+            return
+        }
+        navigator.clipboard.writeText(token)
+            .then(() => toast.success('Token copied! Paste it in the Chrome extension\'s Settings tab.'))
+            .catch(() => toast.error('Failed to copy. Try copying from DevTools then Application then Local Storage.'))
     }
 
     return (
@@ -41,6 +52,14 @@ export default function Sidebar() {
                     </NavLink>
                 ))}
             </nav>
+
+            {/* Copy token for Chrome extension */}
+            <button className={s.copyToken} onClick={handleCopyToken} title="Copy JWT for Chrome extension">
+                <span className={s.iconWrap}>
+                    <Clipboard size={ICON_SIZE} />
+                </span>
+                <span>Copy Token</span>
+            </button>
 
             {/* user profile */}
             <div className={s.profile}>

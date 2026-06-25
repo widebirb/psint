@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PSINT Job Tracker</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+
+<body>
+  <!--  Header  -->
+  <header class="header">
+    <div class="header-logo">
+      <img src="../icons/icon48.png" alt="PSINT" class="header-icon" />
+      <span class="header-title">PSINT Job Tracker</span>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button class="tab tab--active" id="tab-save" role="tab" aria-selected="true" aria-controls="panel-save">
+        Add Job
+      </button>
+      <button class="tab" id="tab-settings" role="tab" aria-selected="false" aria-controls="panel-settings">
+        Settings
+      </button>
+    </nav>
+  </header>
+
+  <!-- Add Job Panel -->
+  <section id="panel-save" role="tabpanel" aria-labelledby="tab-save">
+
+    <form id="job-form" class="job-form" novalidate>
+
+      <div class="form-group">
+        <label class="form-label" for="field-title">
+          Job Title <span class="required" aria-hidden="true">*</span>
+        </label>
+        <input class="form-input" id="field-title" name="title" type="text" placeholder="e.g. Software Engineer"
+          autocomplete="off" required aria-required="true" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="field-company">
+          Company <span class="required" aria-hidden="true">*</span>
+        </label>
+        <input class="form-input" id="field-company" name="company" type="text" placeholder="e.g. Acme Corp"
+          autocomplete="off" required aria-required="true" />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="field-location">Location</label>
+          <input class="form-input" id="field-location" name="location" type="text" placeholder="e.g. Remote, Sydney"
+            autocomplete="off" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="field-job-type">Job Type</label>
+          <input class="form-input" id="field-job-type" name="job_type" type="text" placeholder="e.g. Full-time"
+            autocomplete="off" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="field-salary">Salary Range</label>
+          <input class="form-input" id="field-salary" name="salary_range" type="text" placeholder="e.g. $80k – $100k"
+            autocomplete="off" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="field-source">Source</label>
+          <select class="form-input form-select" id="field-source" name="source_site">
+            <option value="manual" selected>Manual</option>
+            <option value="linkedin">LinkedIn</option>
+            <option value="indeed">Indeed</option>
+            <option value="jobstreet">JobStreet</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="field-url">Job URL</label>
+        <input class="form-input form-input--url" id="field-url" name="description_url" type="url"
+          placeholder="https://..." autocomplete="off" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="field-notes">Notes</label>
+        <textarea class="form-input form-textarea" id="field-notes" name="notes"
+          placeholder="Add any notes about this role…" rows="3"></textarea>
+      </div>
+
+      <!-- Feedback message -->
+      <div id="form-feedback" class="feedback hidden" role="alert" aria-live="polite"></div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn--primary" id="btn-save" aria-label="Save job to PSINT Job Tracker">
+          <span id="btn-save-text">Save to Tracker</span>
+          <span id="btn-save-spinner" class="btn-spinner hidden" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="btn btn--ghost" id="btn-clear" aria-label="Clear form">
+          Clear
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Settings Panel -->
+  <section id="panel-settings" role="tabpanel" aria-labelledby="tab-settings" class="hidden">
+
+    <div class="settings-section">
+      <h2 class="settings-heading">Authentication</h2>
+      <p class="settings-desc">
+        Paste your JWT from the web app's sidebar (<strong>Copy Token</strong> button). It lets the extension save jobs
+        on your behalf.
+      </p>
+
+      <div class="form-group">
+        <label class="form-label" for="field-token">JWT Token</label>
+        <div class="input-with-action">
+          <input class="form-input" id="field-token" type="password" placeholder="Paste your token here…"
+            autocomplete="off" aria-label="JWT token" />
+          <button type="button" class="icon-btn" id="btn-toggle-token" aria-label="Show or hide token"
+            title="Show / hide">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="settings-actions">
+        <button type="button" class="btn btn--primary btn--sm" id="btn-save-token">Save Token</button>
+        <button type="button" class="btn btn--ghost btn--sm" id="btn-test-connection">Test Connection</button>
+      </div>
+
+      <div id="token-feedback" class="feedback hidden" role="alert" aria-live="polite"></div>
+    </div>
+
+    <div class="settings-section settings-section--border">
+      <h2 class="settings-heading">API URL</h2>
+      <p class="settings-desc">
+        URL of your PSINT backend. Use <code>http://localhost:5000</code> for local development.
+      </p>
+
+      <div class="form-group">
+        <label class="form-label" for="field-api-url">API Base URL</label>
+        <input class="form-input" id="field-api-url" type="url" placeholder="http://localhost:5000" autocomplete="off"
+          aria-label="API base URL" />
+      </div>
+
+      <button type="button" class="btn btn--primary btn--sm" id="btn-save-url">Save URL</button>
+      <div id="url-feedback" class="feedback hidden" role="alert" aria-live="polite"></div>
+    </div>
+
+    <div class="settings-section settings-section--border">
+      <h2 class="settings-heading">Extension Origin</h2>
+      <p class="settings-desc">
+        Add this to <code>EXTENSION_ORIGIN</code> in your backend <code>.env</code> to allow API calls from this
+        extension.
+      </p>
+      <div class="input-with-action">
+        <input class="form-input form-input--mono" id="field-ext-id" type="text" readonly
+          aria-label="Extension origin URL" />
+        <button type="button" class="icon-btn" id="btn-copy-ext-id" aria-label="Copy extension origin" title="Copy">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+  <script type="module" src="popup.js"></script>
+</body>
+
+</html>

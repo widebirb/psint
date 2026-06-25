@@ -60,6 +60,29 @@
   color: #2563eb;
 }
 
+.copyToken {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #555;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  margin-top: 4px;
+}
+
+.copyToken:hover {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
 .logout {
   display: flex;
   align-items: center;
