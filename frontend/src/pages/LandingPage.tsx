@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import LoginModal from '../components/LoginModal'
-import { BriefcaseBusiness, ChartNoAxesCombined, Zap } from "lucide-react";
+import { ChartNoAxesCombined, Zap } from "lucide-react";
 import s from './LandingPage.module.css'
 
 export default function LandingPage() {
