@@ -62,7 +62,7 @@ jobs:
           dotnet-version: '10.0.x'
           
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore JobTracker.Tests/JobTracker.Tests.csproj
         
       - name: Test
-        run: dotnet test --no-restore --logger "console;verbosity=normal"
+        run: dotnet test JobTracker.Tests/JobTracker.Tests.csproj --no-restore --logger "console;verbosity=normal"
