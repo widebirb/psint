@@ -6,6 +6,7 @@ using JobTracker.Api.Endpoints;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Amazon.Lambda.AspNetCoreServer;
 
 
 // Load .env in development
@@ -13,6 +14,10 @@ if (File.Exists(".env"))
     Env.TraversePath().Load();
 
 var builder = WebApplication.CreateBuilder(args);
+
+// When running on AWS Lambda, replaces Kestrel with the Lambda runtime.
+// Locally (no AWS_LAMBDA_RUNTIME_API env var), this is a no-op.
+builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
