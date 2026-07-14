@@ -10,7 +10,10 @@ export default function LandingPage() {
         <div className={s.page}>
             {/*  NAVBAR */}
             <header className={s.nav}>
-                <span className={s.logo}>psint</span>
+                <span className={s.logo}>
+                    <img src="/illustrations/icon.png" alt="" className={s.logoIcon} />
+                    psint
+                </span>
                 <button
                     id="nav-login-btn"
                     className={s.navLoginBtn}
@@ -23,10 +26,11 @@ export default function LandingPage() {
             {/*  HERO  */}
             <section className={s.hero}>
                 <div className={s.heroContent}>
-                    <div className={s.badge}>Job Tracker</div>
+                    <div className={s.badge}>Track your job applications</div>
                     <h1 className={s.heroTitle}>
-                        Please Speed<br />
-                        <span className={s.heroAccent}>I need This</span>
+                        PS
+                        <span className={s.heroAccent}>INT</span><br />
+                        <p className={s.featuresEyebrow}>Please Speed I Need This</p>
                     </h1>
                     <p className={s.heroSubtitle}>
                         Save jobs from everywhere in one click.
@@ -98,8 +102,7 @@ export default function LandingPage() {
 
                     {/* Right: feature cards */}
                     <div className={s.featuresRight}>
-                        <p className={s.featuresEyebrow}>Everything you need</p>
-                        <h2 className={s.featuresTitle}>Your job search organized</h2>
+                        <h2 className={s.featuresTitle}>Organize your job search</h2>
                         <p className={s.featuresSubtitle}>
                             Stop losing track of applications across spreadsheets and browser tabs.
                             PSINT brings everything into one clean dashboard.
@@ -110,13 +113,13 @@ export default function LandingPage() {
                                 <span className={s.featureIcon}><Zap /></span>
                                 <div>
                                     <h3>Track Applications</h3>
-                                    <p>Track your job listings directly from anywhere with our Chrome extension.</p>
+                                    <p>Track your job listings directly from anywhere, without missing an update</p>
                                 </div>
                             </div>
                             <div className={s.featureCard}>
                                 <span className={s.featureIcon}><ChartNoAxesCombined /></span>
                                 <div>
-                                    <h3>Stay on Top</h3>
+                                    <h3>Watch your stream</h3>
                                     <p>Visual analytics show your pipeline at a glance. Know exactly where you stand.</p>
                                 </div>
                             </div>
@@ -130,7 +133,7 @@ export default function LandingPage() {
                 <div className={s.statsGrid}>
                     {[
                         { value: 'Informative', label: 'Analytics & Insights', sub: 'Know exactly where you stand' },
-                        { value: '30 seconds', label: 'To save a job', sub: 'Via Chrome extension' },
+                        { value: '30 seconds', label: 'To save a job', sub: 'All in one place' },
                         { value: '100%', label: 'Free to use', sub: 'No paywalls ever' },
                     ].map((stat, i) => (
                         <div key={i} className={s.statCard}>
@@ -157,7 +160,10 @@ export default function LandingPage() {
 
             {/*  FOOTER  */}
             <footer className={s.footer}>
-                <span className={s.logo}>psint</span>
+                <span className={s.logo}>
+                    <img src="/illustrations/icon.png" alt="" className={s.logoIcon} />
+                    psint
+                </span>
                 <p className={s.footerCopy}>© 2026 psint. All rights reserved.</p>
             </footer>
 

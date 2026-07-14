@@ -66,9 +66,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
                     ✕
                 </button>
 
-                <div className={s.logoMark}>
-                    <span className={s.logoText}>psint</span>
-                </div>
+                <img src="/illustrations/icon.png" alt="" className={s.logoIcon} />
 
                 <h2 className={s.title}>Welcome back</h2>
                 <p className={s.subtitle}>Sign in to track your job applications</p>
@@ -89,8 +87,8 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
                 <p className={s.terms}>
                     By signing in, you agree to our{' '}
-                    <a href="#" className={s.link}>Terms of Service</a>{' '}and{' '}
-                    <a href="#" className={s.link}>Privacy Policy</a>.
+                    <a href="/info#terms" className={s.link}>Terms of Service</a>{' '}and{' '}
+                    <a href="/info#privacy" className={s.link}>Privacy Policy</a>.
                 </p>
             </div>
         </div>

@@ -14,9 +14,9 @@
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
-  --shadow-lg: 0 8px 40px rgba(0,0,0,0.14);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.14);
 }
 
 /* reset */
@@ -33,14 +33,15 @@ body {
 }
 
 /* page layout*/
-.page {
-  max-width: 1100px;
-}
 
 .page-title {
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 4px;
+}
+
+.page {
+  min-width: 1000px;
 }
 
 .page-subtitle {

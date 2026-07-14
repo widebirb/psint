@@ -25,6 +25,15 @@
   font-weight: 800;
   letter-spacing: -0.8px;
   color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.logoIcon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 .navLoginBtn {
@@ -115,13 +124,13 @@
   cursor: pointer;
   transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
   font-family: inherit;
-  box-shadow: 0 2px 8px rgba(250, 204, 21, 0.35);
+  box-shadow: 0px 3px 0px rgba(250, 204, 21, 0.35);
 }
 
 .btnPrimary:hover {
   background: var(--accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(250, 204, 21, 0.45);
+  box-shadow: 0px 4px 0px rgba(250, 204, 21, 0.45);
 }
 
 .btnPrimary:active {
@@ -244,11 +253,10 @@
 
 .featureMockup {
   background: #fff;
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   border-radius: var(--radius-lg);
   width: 100%;
   max-width: 380px;
-  box-shadow: var(--shadow-md);
   overflow: hidden;
 }
 
@@ -284,10 +292,6 @@
 
 .featureTableRow:last-child {
   border-bottom: none;
-}
-
-.featureTableRow:hover {
-  background: var(--bg-page);
 }
 
 .featureRowTitle {
@@ -337,7 +341,7 @@
   font-size: 0.95rem;
   color: var(--text-secondary);
   line-height: 1.65;
-  max-width: 400px;
+  max-width: 500px;
 }
 
 .featureGrid {
@@ -359,7 +363,6 @@
 }
 
 .featureCard:hover {
-  box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }
 
@@ -383,6 +386,12 @@
 }
 
 .featureCard p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.hyperlink {
   font-size: 0.85rem;
   color: var(--text-secondary);
   line-height: 1.55;
@@ -458,12 +467,12 @@
 .ctaBanner .btnPrimary {
   background: var(--accent-dark);
   color: #fff;
-  box-shadow: 0 2px 12px rgba(120, 53, 15, 0.3);
+  box-shadow: 0 2px 0px rgba(120, 53, 15, 0.3);
 }
 
 .ctaBanner .btnPrimary:hover {
   background: #6B2D0A;
-  box-shadow: 0 4px 20px rgba(120, 53, 15, 0.4);
+  box-shadow: 0 4px 0px rgba(120, 53, 15, 0.4);
 }
 
 /* ── FOOTER ── */

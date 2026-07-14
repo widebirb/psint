@@ -3,6 +3,7 @@ import DashboardPage from './pages/DashboardPage'
 import ApplicationsPage from './pages/ApplicationsPage'
 import AppLayout from './components/AppLayout'
 import LandingPage from "./pages/LandingPage"
+import TermsPage from "./pages/TermsPage"
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const token = localStorage.getItem('jwt')
@@ -13,6 +14,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
+      <Route path="/info" element={<TermsPage />} />
       <Route
         element={
           <PrivateRoute>

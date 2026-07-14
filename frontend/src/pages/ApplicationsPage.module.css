@@ -1,3 +1,132 @@
+.page {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.pageTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.pageSubtitle {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 32px;
+}
+
+.pageHeader .pageSubtitle {
+  margin-bottom: 0;
+}
+
+.muted {
+  color: #888;
+  font-size: 0.875rem;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.table thead {
+  background: #fafafa;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #12121288;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.table td {
+  padding: 13px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  color: #444;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr:hover {
+  background: #fafafa;
+}
+
+.tdPrimary {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.tableEmpty {
+  text-align: center;
+  padding: 48px 16px;
+  color: #aaa;
+}
+
+.btnPrimary {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+  background: var(--accent);
+  color: var(--accent-dark);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  vertical-align: middle;
+}
+
+.btnPrimary:hover {
+  background: var(--accent-hover);
+}
+
+.btnGhost {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+  background: #fff;
+  color: #444;
+  border: 1px solid #ddd;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  vertical-align: middle;
+}
+
+.btnGhost:hover:not(:disabled) {
+  background: #f5f5f5;
+}
+
+.btnGhost:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* Table wrapper */
 .tableWrap {
   background: #fff;
@@ -101,9 +230,17 @@
   transition: background 0.15s;
 }
 
-.actionBtn:hover        { background: #f0f0f0; }
-.actionBtnDanger:hover  { background: #fb6b6b; }
-.actionBtnEdit:hover    { background: #fcf94188; }
+.actionBtn:hover {
+  background: #f0f0f0;
+}
+
+.actionBtnDanger:hover {
+  background: #fb6b6b;
+}
+
+.actionBtnEdit:hover {
+  background: #fcf94188;
+}
 
 /* Job link */
 .jobLink {

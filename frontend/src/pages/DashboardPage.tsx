@@ -33,9 +33,9 @@ export default function DashboardPage() {
         }
     }, [allJobsData])
     return (
-        <div className="page">
-            <h1 className="page-title">Analytics</h1>
-            <p className="page-subtitle">Overview of your job search.</p>
+        <div className={s.page}>
+            <h1 className={s.pageTitle}>Analytics</h1>
+            <p className={s.pageSubtitle}>Overview of your job search.</p>
 
             <div className={s.grid}>
                 <StatCard label="Total Tracked" value={stats.total} icon={<Folder size={ICON_SIZE} />} color="default" />
@@ -46,17 +46,17 @@ export default function DashboardPage() {
             </div>
 
             {/* recent app */}
-            <div className="section">
-                <h2 className="section-title">Recent Application</h2>
-                {recentLoading && <p className="muted">Loading...</p>}
+            <div className={s.section}>
+                <h2 className={s.sectionTitle}>Recent Application</h2>
+                {recentLoading && <p className={s.muted}>Loading...</p>}
 
                 {!recentLoading && (!recentJobs || recentJobs.length === 0) && (
-                    <p className="muted">No Applications yet.</p>
+                    <p className={s.muted}>No Applications yet.</p>
                 )}
 
                 {recentJobs && recentJobs.length > 0 && (
                     <div className={s.tableWrap}>
-                        <table className="table">
+                        <table className={s.table}>
                             <thead>
                                 <tr>
                                     <th>Role</th>
@@ -69,11 +69,11 @@ export default function DashboardPage() {
                             <tbody>
                                 {recentJobs.map((job) => (
                                     <tr key={job.id}>
-                                        <td className="td-primary">{job.title}</td>
+                                        <td className={s.tdPrimary}>{job.title}</td>
                                         <td>{job.company}</td>
                                         <td><StatusBadge status={job.status} /></td>
-                                        <td className="muted capitalize">{job.source_site ?? ''}</td>
-                                        <td className="muted">{formatDate(job.created_at)}</td>
+                                        <td className={`${s.muted} ${s.capitalize}`}>{job.source_site ?? ''}</td>
+                                        <td className={s.muted}>{formatDate(job.created_at)}</td>
                                     </tr>
                                 ))}
                             </tbody>
