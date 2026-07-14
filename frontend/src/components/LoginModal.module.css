@@ -56,22 +56,11 @@
   color: var(--text-primary);
 }
 
-.logoMark {
+.logoIcon {
   width: 48px;
   height: 48px;
-  background: var(--accent);
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  object-fit: contain;
   margin-bottom: 4px;
-}
-
-.logoText {
-  font-size: 0.85rem;
-  font-weight: 800;
-  color: var(--accent-dark);
-  letter-spacing: -0.5px;
 }
 
 .title {
