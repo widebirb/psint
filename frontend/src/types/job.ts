@@ -39,4 +39,7 @@ export interface UpdateJobPayload {
     location?: string
     job_type?: string
     salary_range?: string
+    description_url?: string
+    source_site?: JobSource
+    date_posted?: string
 }

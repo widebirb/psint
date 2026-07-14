@@ -2,6 +2,7 @@ using JobTracker.Api.Data;
 using JobTracker.Api.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Text.Json.Serialization;
 
 namespace JobTracker.Api.Endpoints;
 
@@ -136,6 +137,8 @@ public static class JobEndpoints
             if (req.JobType is not null) job.JobType = req.JobType;
             if (req.SalaryRange is not null) job.SalaryRange = req.SalaryRange;
             if (req.DescriptionUrl is not null) job.DescriptionUrl = req.DescriptionUrl;
+            if (req.SourceSite is not null) job.SourceSite = req.SourceSite;
+            if (req.DatePosted is not null) job.DatePosted = req.DatePosted;
             if (req.Status is not null) job.Status = req.Status;
             if (req.Notes is not null) job.Notes = req.Notes;
 
@@ -195,12 +198,12 @@ public static class JobEndpoints
     public record CreateJobRequest(
         string Title,
         string Company,
-        string? Location,
-        string? JobType,
-        string? SalaryRange,
-        string? DescriptionUrl,
-        string? SourceSite,
-        DateOnly? DatePosted,
+        [property: JsonPropertyName("location")] string? Location,
+        [property: JsonPropertyName("job_type")] string? JobType,
+        [property: JsonPropertyName("salary_range")] string? SalaryRange,
+        [property: JsonPropertyName("description_url")] string? DescriptionUrl,
+        [property: JsonPropertyName("source_site")] string? SourceSite,
+        [property: JsonPropertyName("date_posted")] DateOnly? DatePosted,
         string? Status,
         string? Notes
     );
@@ -208,10 +211,12 @@ public static class JobEndpoints
     public record UpdateJobRequest(
         string? Title,
         string? Company,
-        string? Location,
-        string? JobType,
-        string? SalaryRange,
-        string? DescriptionUrl,
+        [property: JsonPropertyName("location")] string? Location,
+        [property: JsonPropertyName("job_type")] string? JobType,
+        [property: JsonPropertyName("salary_range")] string? SalaryRange,
+        [property: JsonPropertyName("description_url")] string? DescriptionUrl,
+        [property: JsonPropertyName("source_site")] string? SourceSite,
+        [property: JsonPropertyName("date_posted")] DateOnly? DatePosted,
         string? Status,
         string? Notes
     );
