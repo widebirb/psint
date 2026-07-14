@@ -94,15 +94,15 @@ export default function ApplicationsPage() {
     }
 
     return (
-        <div className="page">
-            <div className="page-header">
+        <div className={s.page}>
+            <div className={s.pageHeader}>
                 <div>
-                    <h1 className="page-title">Applications</h1>
-                    <p className="page-subtitle">
+                    <h1 className={s.pageTitle}>Applications</h1>
+                    <p className={s.pageSubtitle}>
                         {total > 0 ? `${total} application${total !== 1 ? 's' : ''} tracked` : 'No applications yet.'}
                     </p>
                 </div>
-                <button className="btn btn--primary btn--with-icon" onClick={() => { setEditJob(null); setFormOpen(true) }}>
+                <button className={s.btnPrimary} onClick={() => { setEditJob(null); setFormOpen(true) }}>
                     <Plus size={ICON_SIZE_MD} />Add Application
                 </button>
             </div>
@@ -117,7 +117,7 @@ export default function ApplicationsPage() {
                         onChange={(e) => setSearchInput(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && commitSearch()}
                     />
-                    <button className="btn btn--ghost" onClick={commitSearch}>Search</button>
+                    <button className={s.btnGhost} onClick={commitSearch}>Search</button>
                 </div>
 
                 <select
@@ -147,7 +147,7 @@ export default function ApplicationsPage() {
 
                 {(search || status || sourceSite) && (
                     <button
-                        className="btn btn--ghost"
+                        className={s.btnGhost}
                         onClick={() => {
                             setSearch(''); setSearchInput(''); setStatus(''); setSourceSite(''); setPage(1)
                         }}
@@ -159,7 +159,7 @@ export default function ApplicationsPage() {
 
             {/* table */}
             <div className={s.tableWrap}>
-                <table className="table">
+                <table className={s.table}>
                     <thead>
                         <tr>
                             <th onClick={() => handleSort('title')} className={s.thSortable}>
@@ -185,24 +185,24 @@ export default function ApplicationsPage() {
                     <tbody>
                         {isLoading && (
                             <tr>
-                                <td colSpan={8} className="table-empty">Loading...</td>
+                                <td colSpan={8} className={s.tableEmpty}>Loading...</td>
                             </tr>
                         )}
                         {!isLoading && jobs.length === 0 && (
                             <tr>
-                                <td colSpan={8} className="table-empty">No applications found.</td>
+                                <td colSpan={8} className={s.tableEmpty}>No applications found.</td>
                             </tr>
                         )}
                         {jobs.map((job) => (
                             <tr key={job.id}>
-                                <td className="td-primary">
+                                <td className={s.tdPrimary}>
                                     {job.description_url
                                         ? <a href={job.description_url} target="_blank" rel="noreferrer" className={s.jobLink}>{job.title}</a>
                                         : job.title
                                     }
                                 </td>
                                 <td>{job.company}</td>
-                                <td className="muted">{job.location ?? ''}</td>
+                                <td className={s.muted}>{job.location ?? ''}</td>
                                 <td>
                                     <select
                                         className={s.statusSelect}
@@ -216,9 +216,9 @@ export default function ApplicationsPage() {
                                         <option value="rejected">Rejected</option>
                                     </select>
                                 </td>
-                                <td className="muted capitalize">{job.source_site ?? ''}</td>
-                                <td className="muted">{formatDate(job.date_posted)}</td>
-                                <td className="muted">{formatDate(job.created_at)}</td>
+                                <td className={`${s.muted} ${s.capitalize}`}>{job.source_site ?? ''}</td>
+                                <td className={s.muted}>{formatDate(job.date_posted)}</td>
+                                <td className={s.muted}>{formatDate(job.created_at)}</td>
                                 <td>
                                     <div className={s.rowActions}>
                                         <button className={`${s.actionBtn} ${s.actionBtnEdit}`} onClick={() => handleEdit(job)}>
@@ -239,7 +239,7 @@ export default function ApplicationsPage() {
             {totalPages > 0 && (
                 <div className={s.pagination}>
                     <button
-                        className="btn btn--ghost btn--with-icon"
+                        className={s.btnGhost}
                         disabled={page === 1}
                         onClick={() => setPage((p) => p - 1)}
                     >
@@ -247,7 +247,7 @@ export default function ApplicationsPage() {
                     </button>
                     <span className={s.paginationInfo}>Page {page} of {totalPages}</span>
                     <button
-                        className="btn btn--ghost btn--with-icon"
+                        className={s.btnGhost}
                         disabled={page === totalPages}
                         onClick={() => setPage((p) => p + 1)}
                     >
