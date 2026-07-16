@@ -1,8 +1,10 @@
+import { useState } from "react"
 import { NavLink, useNavigate } from "react-router-dom"
 import { toast } from "sonner"
 import s from './Sidebar.module.css'
-import { BriefcaseBusiness, CircleQuestionMarkIcon, Clipboard, FileUser, LayoutDashboard, LogOut } from "lucide-react";
+import { CircleQuestionMarkIcon, Settings, FileUser, LayoutDashboard, LogOut } from "lucide-react";
 import { useUser } from "../hooks/useUser";
+import SettingsModal from "./SettingsModal";
 
 const ICON_SIZE = 18
 const NAV_ITEMS = [
@@ -13,6 +15,7 @@ const NAV_ITEMS = [
 export default function Sidebar() {
     const navigate = useNavigate();
     const { data: user, isLoading } = useUser();
+    const [settingsOpen, setSettingsOpen] = useState(false);
 
     const handleLogout = () => {
         localStorage.removeItem('jwt')
@@ -20,22 +23,11 @@ export default function Sidebar() {
         navigate('/login', { replace: true })
     }
 
-    const handleCopyToken = () => {
-        const token = localStorage.getItem('jwt')
-        if (!token) {
-            toast.error('No token found. Please sign in first.')
-            return
-        }
-        navigator.clipboard.writeText(token)
-            .then(() => toast.success('Token copied! Paste it in the Chrome extension\'s Settings tab.'))
-            .catch(() => toast.error('Failed to copy. Try copying from DevTools then Application then Local Storage.'))
-    }
-
     return (
         <div className={s.sidebar}>
             <div className={s.logo}>
-                <BriefcaseBusiness size={25} />
-                <span>PSINT</span>
+                <img src="/illustrations/icon.png" alt="" className={s.logoIcon} />
+                <span>psint</span>
             </div>
 
             <nav className={s.nav}>
@@ -53,12 +45,12 @@ export default function Sidebar() {
                 ))}
             </nav>
 
-            {/* Copy token for Chrome extension */}
-            <button className={s.copyToken} onClick={handleCopyToken} title="Copy JWT for Chrome extension">
+            {/* Settings */}
+            <button className={s.copyToken} onClick={() => setSettingsOpen(true)} title="Settings">
                 <span className={s.iconWrap}>
-                    <Clipboard size={ICON_SIZE} />
+                    <Settings size={ICON_SIZE} />
                 </span>
-                <span>Copy Token</span>
+                <span>Settings</span>
             </button>
 
             {/* user profile */}
@@ -88,6 +80,8 @@ export default function Sidebar() {
                 </span>
                 <span>Log Out</span>
             </button>
+
+            <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
         </div>
     )
 }
