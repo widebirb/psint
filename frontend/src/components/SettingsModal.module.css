@@ -1,0 +1,203 @@
+.content {
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sectionTitle {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.sectionDesc {
+  font-size: 0.8rem;
+  color: #888;
+  margin: 0;
+}
+
+/* profile card inside modal */
+.profileCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #f9f9f9;
+  border-radius: 10px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #e5e5e5;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatarFallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #2563eb;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.profileName {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.profileEmail {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* token field */
+.tokenField {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.tokenInput {
+  flex: 1;
+  border: none;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  font-family: monospace;
+  outline: none;
+  background: #fafafa;
+  min-width: 0;
+}
+
+.tokenInput:focus {
+  background: #fff;
+}
+
+.iconBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  border: none;
+  background: #fff;
+  color: #888;
+  cursor: pointer;
+  border-left: 1px solid #eee;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.iconBtn:hover {
+  background: #f5f5f5;
+  color: #1a1a1a;
+}
+
+/* separator */
+.separator {
+  height: 1px;
+  background: #e5e5e5;
+  margin: 4px 0;
+}
+
+/* export button */
+.exportBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #555;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  width: 100%;
+  text-align: left;
+}
+
+.exportBtn:hover {
+  background: #f5f5f5;
+  color: #1a1a1a;
+}
+
+/* danger zone */
+.dangerTitle {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #dc2626;
+  margin: 0;
+}
+
+.dangerBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid #fca5a5;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #dc2626;
+  cursor: pointer;
+  transition: background 0.15s;
+  width: 100%;
+  text-align: left;
+}
+
+.dangerBtn:hover {
+  background: #fef2f2;
+}
+
+.deleteConfirm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid #fca5a5;
+  border-radius: 10px;
+  background: #fef2f2;
+}
+
+.deleteWarning {
+  font-size: 0.85rem;
+  color: #dc2626;
+  margin: 0;
+  font-weight: 500;
+}
+
+.deleteActions {
+  display: flex;
+  gap: 8px;
+}
